@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 500" role="img" aria-label="Avatar Cristian Yela - Ax">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stopColor="#181822"/>
+      <stop offset="50%" stopColor="#0e0e14"/>
+      <stop offset="100%" stopColor="#060608"/>
+    </linearGradient>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stopColor="#FFF2A3"/>
+      <stop offset="40%" stopColor="#F5C042"/>
+      <stop offset="80%" stopColor="#D4AF37"/>
+      <stop offset="100%" stopColor="#926E17"/>
+    </linearGradient>
+    <linearGradient id="accentLine" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stopColor="#D4AF37" stopOpacity="0"/>
+      <stop offset="50%" stopColor="#F5C042" stopOpacity="0.8"/>
+      <stop offset="100%" stopColor="#D4AF37" stopOpacity="0"/>
+    </linearGradient>
+    <radialGradient id="goldGlow" cx="50%" cy="40%" r="50%">
+      <stop offset="0%" stopColor="#D4AF37" stopOpacity="0.15"/>
+      <stop offset="100%" stopColor="#D4AF37" stopOpacity="0"/>
+    </radialGradient>
+  </defs>
+
+  {/* Fondo */}
+  <rect width="400" height="500" fill="url(#bgGrad)"/>
+  <circle cx="200" cy="180" r="160" fill="url(#goldGlow)"/>
+
+  {/* Silueta elegante */}
+  <circle cx="200" cy="175" r="72" fill="#1e1e28" stroke="url(#goldGrad)" strokeWidth="3"/>
+  <path d="M70 480c0-85 58-135 130-135s130 50 130 135z" fill="#1a1a24" stroke="url(#goldGrad)" strokeWidth="2.5"/>
+
+  {/* Monograma Ax en el centro */}
+  <g transform="translate(160, 140)">
+    <rect width="80" height="70" rx="16" fill="#09090c" stroke="url(#goldGrad)" strokeWidth="2"/>
+    <text x="40" y="48" text-anchor="middle" font-family="system-ui, sans-serif" font-weight="900" font-size="34" letter-spacing="-2" fill="url(#goldGrad)">Ax</text>
+  </g>
+
+  {/* Borde inferior / texto guía */}
+  <line x1="60" y1="450" x2="340" y2="450" stroke="url(#accentLine)" strokeWidth="1.5"/>
+  <text x="200" y="475" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" font-weight="600" fill="#a1a1aa" letter-spacing="1">CRISTIAN YELA · AX</text>
+</svg>
