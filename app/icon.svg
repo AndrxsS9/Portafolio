@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none">
+  <!-- Favicon: monograma "Ax" editorial (mismas formas que components/Logo.tsx), colores fijos de la versión oscura -->
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#18181d"/>
+      <stop offset="0.5" stop-color="#0d0d11"/>
+      <stop offset="1" stop-color="#050507"/>
+    </linearGradient>
+    <linearGradient id="border" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f5c443" stop-opacity="0.95"/>
+      <stop offset="0.5" stop-color="#b8860b" stop-opacity="0.45"/>
+      <stop offset="1" stop-color="#d4af37" stop-opacity="0.95"/>
+    </linearGradient>
+    <linearGradient id="metal" gradientUnits="userSpaceOnUse" x1="18" y1="16" x2="84" y2="84">
+      <stop offset="0" stop-color="#f5c443"/>
+      <stop offset="0.28" stop-color="#d4af37"/>
+      <stop offset="0.48" stop-color="#f5c443"/>
+      <stop offset="0.72" stop-color="#b8860b"/>
+      <stop offset="1" stop-color="#7a5a0e"/>
+    </linearGradient>
+    <linearGradient id="letterGloss" gradientUnits="userSpaceOnUse" x1="0" y1="20" x2="0" y2="80">
+      <stop offset="0" stop-color="#fff4c8" stop-opacity="0.6"/>
+      <stop offset="0.55" stop-color="#fff4c8" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#d4af37" stop-opacity="0.18"/>
+      <stop offset="1" stop-color="#d4af37" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="gloss" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.07"/>
+      <stop offset="0.5" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <rect x="4" y="4" width="92" height="92" rx="24" fill="url(#bg)"/>
+  <rect x="4" y="4" width="92" height="92" rx="24" fill="url(#gloss)"/>
+  <circle cx="50" cy="52" r="34" fill="url(#glow)"/>
+  <rect x="9" y="9" width="82" height="82" rx="19.5" stroke="url(#border)" stroke-width="0.6" opacity="0.4"/>
+
+  <g transform="translate(-1 0)">
+    <g transform="translate(0 1.4)" fill="#000000" fill-opacity="0.6">
+      <path d="M14 80 L33 20 L36.4 20 L17.4 80 Z"/>
+      <path d="M33 20 L41 20 L88 80 L79 80 Z"/>
+      <path d="M23 54.6 H62 V57.4 H23 Z"/>
+      <path d="M60.7 80 L63.9 80 L84.5 52 L81.3 52 Z"/>
+    </g>
+    <g fill="url(#metal)" stroke="url(#metal)" stroke-width="0.7" stroke-linejoin="round">
+      <path d="M14 80 L33 20 L36.4 20 L17.4 80 Z"/>
+      <path d="M33 20 L41 20 L88 80 L79 80 Z"/>
+      <path d="M23 54.6 H62 V57.4 H23 Z"/>
+      <path d="M60.7 80 L63.9 80 L84.5 52 L81.3 52 Z"/>
+    </g>
+    <g fill="url(#letterGloss)">
+      <path d="M14 80 L33 20 L36.4 20 L17.4 80 Z"/>
+      <path d="M33 20 L41 20 L88 80 L79 80 Z"/>
+      <path d="M23 54.6 H62 V57.4 H23 Z"/>
+      <path d="M60.7 80 L63.9 80 L84.5 52 L81.3 52 Z"/>
+    </g>
+  </g>
+
+  <rect x="4.75" y="4.75" width="90.5" height="90.5" rx="23.25" stroke="url(#border)" stroke-width="1.5"/>
+</svg>
