@@ -1,109 +1,122 @@
-import { ExternalLink, Github, Sparkles } from "lucide-react";
-import { projects } from "@/data/projects";
+"use client";
+
+import { ArrowUpRight, Check, Download, ExternalLink, Github, UserRound } from "lucide-react";
+import { projects, type ProjectLink } from "@/data/projects";
+import { usePrefs } from "@/components/Preferences";
+import Reveal from "@/components/Reveal";
+import TiltCard from "@/components/TiltCard";
+import SectionHeading from "@/components/SectionHeading";
+
+const linkIcon: Record<ProjectLink["kind"], typeof Github> = {
+  github: Github,
+  demo: ExternalLink,
+  download: Download,
+};
 
 export default function Projects() {
+  const { lang, t } = usePrefs();
+
   return (
-    <section id="projects" className="section bg-[#0d0d12] border-t border-zinc-800/60">
+    <section id="projects" className="section border-t border-line bg-bg-alt">
       <div className="wrap">
-        <div className="max-w-2xl">
-          <div className="inline-flex items-center gap-2 rounded-full border border-amber-500/20 bg-amber-500/5 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-amber-300">
-            Portafolio
-          </div>
-          <h2 className="mt-4 font-display text-4xl font-bold tracking-tight text-white sm:text-5xl">
-            Proyectos <span className="bg-gradient-to-r from-amber-200 to-amber-500 bg-clip-text text-transparent">destacados</span>
-          </h2>
-          <p className="mt-4 text-lg leading-relaxed text-zinc-400">
-            Soluciones de software, desarrollo full-stack, aplicaciones móviles e integraciones
-            con Inteligencia Artificial en las que he venido trabajando.
-          </p>
-        </div>
+        <SectionHeading eyebrow={t.projects.eyebrow} title={t.projects.title} accent={t.projects.titleAccent} intro={t.projects.intro} />
 
-        <div className="mt-14 space-y-16 lg:space-y-24">
-          {projects.map((p, i) => (
-            <article
-              key={p.id}
-              className="grid items-center gap-8 lg:grid-cols-2 lg:gap-14"
-            >
-              <div className={i % 2 === 1 ? "lg:order-2" : ""}>
-                <div className="relative aspect-[16/10] overflow-hidden rounded-3xl border border-amber-500/30 bg-gradient-to-br from-[#1b1b24] via-[#101016] to-[#08080a] p-1 shadow-2xl shadow-black/80">
-                  {p.image ? (
-                    // eslint-disable-next-line @next/next/no-img-element
-                    <img
-                      src={p.image}
-                      alt={p.title}
-                      className="h-full w-full rounded-[1.4rem] object-cover transition duration-300 hover:scale-105"
-                    />
-                  ) : (
-                    <div className="flex h-full w-full flex-col justify-between rounded-[1.4rem] bg-gradient-to-br from-[#181820] to-[#0c0c10] p-8 text-white">
-                      <div className="flex items-center gap-2 text-amber-400">
-                        <Sparkles size={18} />
-                        <span className="text-xs uppercase tracking-widest font-bold">
-                          {p.category}
-                        </span>
-                      </div>
-                      <div className="flex items-end justify-between">
-                        <span className="font-display text-6xl font-black leading-none tracking-tight bg-gradient-to-br from-amber-200 via-amber-400 to-yellow-600 bg-clip-text text-transparent opacity-90">
-                          {p.title
-                            .split(" ")
-                            .filter((w) => !["—", "-", "y", "de", "e"].includes(w.toLowerCase()))
-                            .slice(0, 2)
-                            .map((w) => w[0])
-                            .join("")}
-                        </span>
-                        <span className="rounded-full border border-amber-500/30 bg-amber-500/10 px-3 py-1 text-xs font-semibold text-amber-300 backdrop-blur-sm">
-                          {p.year}
-                        </span>
-                      </div>
+        <div className="mt-14 space-y-20 lg:space-y-28">
+          {projects.map((project, i) => {
+            const p = project.text[lang];
+            const reversed = i % 2 === 1;
+            return (
+              <article key={project.id} className="group grid items-center gap-8 lg:grid-cols-2 lg:gap-14">
+                {/* Imagen: entra desde un lado y se inclina con el mouse */}
+                <Reveal variant={reversed ? "right" : "left"} className={reversed ? "lg:order-2" : ""}>
+                  <TiltCard max={6} className="rounded-3xl">
+                    <div className="project-media relative aspect-[16/10] overflow-hidden rounded-3xl border border-accent/30 bg-surface-2 shadow-[0_30px_60px_-30px_var(--shadow)] transition-shadow duration-500 group-hover:shadow-[0_35px_70px_-25px_var(--glow)]">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={project.image}
+                        alt={`${t.projects.imageAlt} ${p.title}`}
+                        loading="lazy"
+                        data-depth="-8"
+                        className="h-full w-full object-cover"
+                      />
+                      <span data-depth="14" className="absolute left-3 top-3 rounded-full border border-tag-border bg-tag-bg px-3 py-1 text-xs font-semibold text-tag-fg backdrop-blur-md">
+                        {String(i + 1).padStart(2, "0")} · {project.year}
+                      </span>
                     </div>
-                  )}
+                  </TiltCard>
+                </Reveal>
+
+                <div className={`min-w-0 ${reversed ? "lg:order-1" : ""}`}>
+                  <Reveal variant="down">
+                    <p className="text-xs font-bold uppercase tracking-widest text-accent">{p.category}</p>
+                  </Reveal>
+                  <Reveal as="h3" variant="blur" delay={80} className="mt-2 flex items-center gap-2 font-display text-3xl font-bold text-fg sm:text-4xl">
+                    {p.title}
+                    <ArrowUpRight
+                      size={28}
+                      className="text-accent opacity-0 transition-all duration-500 group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:opacity-100"
+                    />
+                  </Reveal>
+                  <Reveal as="p" delay={160} className="mt-4 leading-relaxed text-fg-soft">
+                    {p.description}
+                  </Reveal>
+
+                  <ul className="mt-5 grid gap-2 sm:grid-cols-3">
+                    {p.features.map((f, k) => (
+                      <Reveal
+                        as="li"
+                        key={f}
+                        variant="zoom"
+                        delay={220 + k * 90}
+                        className="rest-shadow flex items-start gap-2 rounded-xl border border-line bg-surface px-3 py-2 text-sm text-fg-soft"
+                      >
+                        <Check size={16} className="mt-0.5 shrink-0 text-accent" />
+                        {f}
+                      </Reveal>
+                    ))}
+                  </ul>
+
+                  <Reveal delay={300} className="mt-4 flex items-start gap-2 rounded-xl border-l-2 border-accent bg-accent/5 px-3 py-2 text-sm text-fg-soft">
+                    <UserRound size={16} className="mt-0.5 shrink-0 text-accent" />
+                    <span>
+                      <strong className="text-fg">{t.projects.role}:</strong> {p.role}
+                    </span>
+                  </Reveal>
+
+                  <Reveal as="ul" delay={360} className="mt-5 flex flex-wrap gap-2">
+                    {project.tags.map((tag) => {
+                      const label = typeof tag === "string" ? tag : tag[lang];
+                      return (
+                        <li
+                          key={typeof tag === "string" ? tag : tag.es}
+                          className="rounded-full border border-accent/20 bg-accent/5 px-3 py-1 text-xs font-medium text-accent transition-colors hover:bg-accent/15"
+                        >
+                          {label}
+                        </li>
+                      );
+                    })}
+                  </Reveal>
+
+                  <Reveal delay={420} className="mt-7 flex flex-wrap gap-3">
+                    {project.links.map((link) => {
+                      const Icon = linkIcon[link.kind];
+                      return (
+                        <a
+                          key={link.href}
+                          href={link.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className={`btn !py-2.5 ${link.kind === "github" ? "btn-outline" : "btn-primary"}`}
+                        >
+                          <Icon size={18} /> {link.label[lang]}
+                        </a>
+                      );
+                    })}
+                  </Reveal>
                 </div>
-              </div>
-
-              <div className={i % 2 === 1 ? "lg:order-1" : ""}>
-                <p className="text-xs font-bold uppercase tracking-widest text-amber-400">
-                  {p.category} · {p.year}
-                </p>
-                <h3 className="mt-2 font-display text-3xl font-bold text-white">
-                  {p.title}
-                </h3>
-                <p className="mt-4 leading-relaxed text-zinc-300">{p.description}</p>
-
-                <ul className="mt-5 flex flex-wrap gap-2">
-                  {p.tags.map((t) => (
-                    <li
-                      key={t}
-                      className="rounded-full border border-amber-500/20 bg-amber-500/5 px-3 py-1 text-xs font-medium text-amber-200"
-                    >
-                      {t}
-                    </li>
-                  ))}
-                </ul>
-
-                <div className="mt-7 flex flex-wrap gap-3">
-                  {p.github && (
-                    <a
-                      href={p.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="btn btn-outline !py-2.5"
-                    >
-                      <Github size={18} /> Repositorio
-                    </a>
-                  )}
-                  {p.demo && (
-                    <a
-                      href={p.demo}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="btn btn-primary !py-2.5"
-                    >
-                      <ExternalLink size={18} /> Ver Demo
-                    </a>
-                  )}
-                </div>
-              </div>
-            </article>
-          ))}
+              </article>
+            );
+          })}
         </div>
       </div>
     </section>
