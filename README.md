@@ -1,54 +1,44 @@
-# Portafolio Profesional — Cristian Andrés Yela Parra (Ax)
+# Portafolio — Cristian Andrés Yela Parra (Ax)
 
-Portafolio web moderno de alto contraste (Negro y Dorado) desarrollado con **Next.js 15 (App Router)**, **TypeScript** y **Tailwind CSS v4**.
+Portafolio web en negro y dorado hecho con **Next.js 15 (App Router)**, **TypeScript** y **Tailwind CSS v4**.
 
 ## ✨ Características
 
-- ⚡ **Next.js 15 App Router:** Arquitectura modular basada en componentes y renderizado óptimo.
-- 🎨 **Diseño Negro & Dorado:** Estética elegante con colores de alto contraste y logotipo monograma **Ax**.
-- 📱 **100% Responsivo:** Adaptado para móviles, tablets y pantallas de escritorio.
-- 🛠️ **Configuración Centralizada:** Datos y perfil administrables en un único archivo (`data/profile.ts`).
-- 🚀 **Proyectos Reales:** Secciones dedicadas para desarrollos en web, móvil (React Native / Expo) e Inteligencia Artificial (Google Gemini & OCR).
+- 🌗 **Modo claro y oscuro** con botón sol/luna. Recuerda la elección y, la primera vez, usa el tema del sistema.
+- 🌎 **Español / Inglés**: el botón ES/EN traduce toda la página, incluidos los proyectos y la hoja de vida que se descarga.
+- 🎬 **Animaciones al hacer scroll**: las secciones y tarjetas aparecen con fade, desenfoque, zoom y deslizamiento. La línea de tiempo se dibuja mientras bajas.
+- 🃏 **Tarjetas 3D**: las tarjetas de proyectos, habilidades y "Sobre mí" se inclinan siguiendo el mouse, con un foco de luz dorado.
+- ⌨️ Hero con texto que se escribe solo, contadores animados y anillo dorado giratorio alrededor de la foto.
+- 📱 **Responsive** revisado para celular (footer compacto, correo que no se desborda, menú móvil animado).
+- ♿ Respeta la opción del sistema "reducir movimiento".
 
----
+## 🚀 Ejecutar localmente
 
-## 🚀 Cómo ejecutarlo localmente
+```bash
+npm install
+npm run dev      # http://localhost:3000
+npm run build    # compilación de producción
+```
 
-1. **Instalar dependencias:**
-   ```bash
-   npm install
-   ```
+## 📂 Dónde editar cada cosa
 
-2. **Iniciar servidor de desarrollo:**
-   ```bash
-   npm run dev
-   ```
-   Abre [http://localhost:3000](http://localhost:3000) en tu navegador.
-
-3. **Compilar para producción:**
-   ```bash
-   npm run build
-   npm start
-   ```
-
----
-
-## 📂 Estructura del Proyecto
-
-| Sección / Elemento | Ubicación |
+| Qué | Archivo |
 | --- | --- |
-| **Datos de Perfil & Bio** | `data/profile.ts` |
-| **Proyectos & Repositorios** | `data/projects.ts` |
-| **Estilos & Paleta (Negro/Dorado)** | `app/globals.css` |
-| **Metadatos y SEO** | `app/layout.tsx` |
-| **Logotipo Ax** | `components/Logo.tsx` |
-| **Currículum Vitae (PDF)** | `public/cv.pdf` |
-| **Imágenes & Avatar** | `public/images/` |
+| Datos personales, textos ES/EN, habilidades, trayectoria | `data/profile.ts` |
+| Proyectos (textos ES/EN, links, imagen) | `data/projects.ts` |
+| Textos de la interfaz (menú, botones, títulos) | `data/i18n.ts` |
+| Colores de cada tema y animaciones | `app/globals.css` |
+| Imágenes de los proyectos | `public/images/` |
+| Foto de perfil | `public/images/` (y la ruta `photo` en `data/profile.ts`) |
+| Hoja de vida (español / inglés) | `public/cv.pdf` / `public/cv-en.pdf` |
 
----
+## 🧩 Proyectos incluidos
+
+- **FoodAI** — App móvil con IA (React Native + Expo) y su backend en Express 5.
+- **CommandDeck** — App de escritorio (Tauri + Rust + React) que convierte lenguaje natural en comandos.
+- **FocusPulse** — App de smartwatch que detecta la modorra.
+- **Plomo y Paja** — Videojuego FPS en Unity, hecho en equipo.
 
 ## 👤 Autor
 
-- **Cristian Andrés Yela Parra**
-- GitHub: [@AndrxsS9](https://github.com/AndrxsS9)
-- Correo: `cristian.yela@campusucc.edu.co`
+**Cristian Andrés Yela Parra** · GitHub [@AndrxsS9](https://github.com/AndrxsS9) · `cristian.yela@campusucc.edu.co`
