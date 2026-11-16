@@ -1,67 +1,81 @@
-import { Code2, Smartphone, Sparkles } from "lucide-react";
-import { profile } from "@/data/profile";
+"use client";
 
-const highlightIcons = [Code2, Smartphone, Sparkles];
+import { Code2, Download, MonitorSmartphone, Sparkles } from "lucide-react";
+import { profile, profileText } from "@/data/profile";
+import { usePrefs } from "@/components/Preferences";
+import Reveal from "@/components/Reveal";
+import TiltCard from "@/components/TiltCard";
+import SectionHeading from "@/components/SectionHeading";
+
+const highlightIcons = [Code2, MonitorSmartphone, Sparkles];
 
 export default function About() {
+  const { lang, t } = usePrefs();
+  const p = profileText[lang];
+
   return (
-    <section id="about" className="section bg-[#0d0d12] border-y border-zinc-800/60">
-      <div className="wrap grid items-center gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
-        <div className="relative mx-auto w-full max-w-sm">
-          <div className="aspect-square overflow-hidden rounded-[2rem] border border-amber-500/30 bg-gradient-to-br from-[#181820] to-[#0a0a0d] shadow-xl">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/images/avatar.svg"
-              alt={`${profile.name} trabajando`}
-              className="h-full w-full object-cover"
-            />
-          </div>
-          <div className="absolute -bottom-5 -right-3 rounded-2xl border border-amber-500/30 bg-[#16161d] px-5 py-4 shadow-xl shadow-black/60 sm:-right-6">
-            <p className="font-display text-2xl font-extrabold text-amber-400">
-              {profile.stats[0]?.value} {profile.stats[0]?.label}
+    <section id="about" className="section border-y border-line bg-bg-alt">
+      <div className="wrap grid items-center gap-14 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
+        <Reveal variant="left" className="relative mx-auto w-full max-w-[17rem] sm:max-w-sm">
+          <TiltCard max={8} className="group/photo rounded-[2rem]">
+            <div className="aspect-square overflow-hidden rounded-[2rem] border border-accent/30 bg-gradient-to-br from-surface-2 to-bg-deep shadow-[0_30px_60px_-30px_var(--shadow)]">
+              {/* Zoom leve al pasar el mouse para que el parallax no deje ver los bordes */}
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={profile.photo}
+                alt={`${t.about.photoAlt} ${profile.fullName}`}
+                data-depth="-8"
+                className="h-full w-full object-cover transition-[scale] duration-700 ease-out group-hover/photo:scale-[1.06]"
+              />
+            </div>
+          </TiltCard>
+          {/* Insignia: dentro del ancho en móvil para no desbordar */}
+          <Reveal
+            variant="zoom"
+            delay={350}
+            className="absolute -bottom-6 right-2 rounded-2xl border border-accent/30 bg-surface px-4 py-3 shadow-[0_20px_40px_-20px_var(--shadow)] sm:-right-6 sm:px-5 sm:py-4"
+          >
+            <p className="font-display text-xl font-extrabold text-accent sm:text-2xl">
+              {p.stats[0].value} {t.about.years}
             </p>
-            <p className="text-xs font-medium text-zinc-400">{profile.about.semester} · UCC Pasto</p>
-          </div>
-        </div>
+            <p className="text-xs font-medium text-muted">{p.about.semester} · UCC Pasto</p>
+          </Reveal>
+        </Reveal>
 
-        <div>
-          <div className="inline-flex items-center gap-2 rounded-full border border-amber-500/20 bg-amber-500/5 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-amber-300">
-            Conóceme
-          </div>
+        <div className="min-w-0">
+          <SectionHeading eyebrow={t.about.eyebrow} title={t.about.title} accent={t.about.titleAccent} />
 
-          <h2 className="mt-4 font-display text-4xl font-bold tracking-tight text-white sm:text-5xl">
-            Sobre <span className="bg-gradient-to-r from-amber-200 to-amber-500 bg-clip-text text-transparent">mí</span>
-          </h2>
-
-          <div className="mt-6 space-y-4 text-lg leading-relaxed text-zinc-300">
-            <p>{profile.about.p1}</p>
-            <p>{profile.about.p2}</p>
+          <div className="mt-6 space-y-4 text-base leading-relaxed text-fg-soft sm:text-lg">
+            <Reveal as="p" delay={150}>{p.about.p1}</Reveal>
+            <Reveal as="p" delay={250}>{p.about.p2}</Reveal>
           </div>
 
           <ul className="mt-8 grid gap-4 sm:grid-cols-3">
-            {profile.about.highlights.map(({ title, text }, index) => {
+            {p.about.highlights.map(({ title, text }, index) => {
               const Icon = highlightIcons[index % highlightIcons.length];
               return (
-                <li
-                  key={title}
-                  className="rounded-2xl border border-amber-500/20 bg-[#14141b] p-4 transition-all hover:border-amber-500/40 hover:bg-[#181822]"
-                >
-                  <Icon className="text-amber-400" size={26} />
-                  <p className="mt-2 font-semibold text-white">{title}</p>
-                  <p className="mt-1 text-sm text-zinc-400">{text}</p>
-                </li>
+                <Reveal as="li" key={title} variant="flip" delay={200 + index * 120}>
+                  <TiltCard className="rest-shadow group h-full rounded-2xl border border-line bg-surface p-4 hover:border-accent/50 hover:shadow-[0_20px_40px_-20px_var(--glow)]">
+                    {/* Envoltorio: el ícono ya anima translate/rotate con transición propia */}
+                    <span data-depth="16" className="block w-fit">
+                      <Icon className="text-accent transition-transform duration-500 group-hover:-rotate-12 group-hover:scale-125" size={26} />
+                    </span>
+                    <p data-depth="9" className="mt-2 font-semibold text-fg">{title}</p>
+                    <p data-depth="4" className="mt-1 text-sm text-muted">{text}</p>
+                  </TiltCard>
+                </Reveal>
               );
             })}
           </ul>
 
-          <div className="mt-9 flex flex-wrap gap-4">
-            <a href="/cv.pdf" download className="btn btn-primary">
-              Descargar CV
+          <Reveal delay={300} className="mt-9 flex flex-wrap gap-3 sm:gap-4">
+            <a href={profile.cv[lang]} download className="btn btn-primary">
+              <Download size={18} /> {t.about.download}
             </a>
             <a href="#projects" className="btn btn-outline">
-              Ver proyectos
+              {t.about.seeProjects}
             </a>
-          </div>
+          </Reveal>
         </div>
       </div>
     </section>

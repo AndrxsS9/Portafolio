@@ -1,67 +1,59 @@
-import {
-  Code2,
-  Cpu,
-  Layers,
-  Smartphone,
-  Sparkles,
-  Workflow,
-} from "lucide-react";
-import { profile } from "@/data/profile";
+"use client";
 
-const serviceIcons = [Code2, Smartphone, Sparkles, Layers, Cpu, Workflow];
+import { Code2, Gamepad2, Layers, Smartphone, Sparkles, Workflow } from "lucide-react";
+import { profile, profileText } from "@/data/profile";
+import { usePrefs } from "@/components/Preferences";
+import Reveal from "@/components/Reveal";
+import TiltCard from "@/components/TiltCard";
+import SectionHeading from "@/components/SectionHeading";
+
+const serviceIcons = [Code2, Smartphone, Sparkles, Layers, Gamepad2, Workflow];
 
 export default function Skills() {
-  return (
-    <section id="skills" className="section bg-[#09090b] text-white">
-      <div className="wrap">
-        <div className="max-w-2xl">
-          <div className="inline-flex items-center gap-2 rounded-full border border-amber-500/20 bg-amber-500/5 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-amber-300">
-            Habilidades & Servicios
-          </div>
-          <h2 className="mt-4 font-display text-4xl font-bold tracking-tight text-white sm:text-5xl">
-            Qué puedo <span className="bg-gradient-to-r from-amber-200 to-amber-500 bg-clip-text text-transparent">hacer</span>
-          </h2>
-          <p className="mt-4 text-lg leading-relaxed text-zinc-400">
-            Habilidades técnicas, metodologías y herramientas que aplico en el desarrollo
-            de software moderno y proyectos con Inteligencia Artificial.
-          </p>
-        </div>
+  const { lang, t } = usePrefs();
+  const p = profileText[lang];
+  // Se duplica la lista para que la cinta se desplace sin cortes
+  const loop = [...profile.tech, ...profile.tech];
 
-        <ul className="mt-12 grid border-t border-zinc-800/80 sm:grid-cols-2 lg:grid-cols-3">
-          {profile.services.map(({ title, text }, index) => {
+  return (
+    <section id="skills" className="section bg-bg">
+      <div className="wrap">
+        <SectionHeading eyebrow={t.skills.eyebrow} title={t.skills.title} accent={t.skills.titleAccent} intro={t.skills.intro} />
+
+        <ul className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-5">
+          {p.services.map(({ title, text }, index) => {
             const Icon = serviceIcons[index % serviceIcons.length];
             return (
-              <li
-                key={title}
-                className="group border-b border-zinc-800/80 py-8 transition-colors sm:pr-8 lg:[&:not(:nth-child(3n+1))]:pl-8 lg:[&:not(:nth-child(3n))]:border-r lg:[&:not(:nth-child(3n))]:border-zinc-800/80"
-              >
-                <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-amber-500/25 bg-amber-500/5 text-amber-400 transition-all duration-300 group-hover:scale-110 group-hover:bg-amber-500/20 group-hover:border-amber-400">
-                  <Icon size={24} />
-                </div>
-                <h3 className="mt-4 font-display text-xl font-semibold text-white transition-colors group-hover:text-amber-300">
-                  {title}
-                </h3>
-                <p className="mt-2 leading-relaxed text-zinc-400">{text}</p>
-              </li>
+              <Reveal as="li" key={title} variant="up" delay={(index % 3) * 120}>
+                <TiltCard className="rest-shadow group h-full rounded-3xl border border-line bg-surface p-6 hover:border-accent/50 hover:shadow-[0_25px_50px_-25px_var(--glow)] sm:p-7">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-accent/25 bg-accent/10 text-accent transition-all duration-500 group-hover:rotate-6 group-hover:scale-110 group-hover:bg-accent-strong group-hover:text-black">
+                    <Icon size={24} />
+                  </div>
+                  <h3 className="mt-4 font-display text-xl font-semibold text-fg transition-colors group-hover:text-accent">{title}</h3>
+                  <p className="mt-2 leading-relaxed text-muted">{text}</p>
+                </TiltCard>
+              </Reveal>
             );
           })}
         </ul>
 
-        <div className="mt-14 rounded-3xl border border-amber-500/20 bg-gradient-to-br from-[#121218] via-[#0d0d12] to-[#09090b] p-8">
-          <p className="text-xs font-semibold uppercase tracking-widest text-amber-400">
-            Stack Tecnológico Principal
-          </p>
-          <ul className="mt-5 flex flex-wrap gap-2.5" aria-label="Tecnologías">
-            {profile.tech.map((t) => (
-              <li
-                key={t}
-                className="rounded-full border border-amber-500/25 bg-amber-500/5 px-4 py-1.5 text-sm font-medium text-amber-200 transition-all hover:border-amber-400 hover:bg-amber-500/20 hover:text-white"
-              >
-                {t}
-              </li>
-            ))}
-          </ul>
-        </div>
+        <Reveal variant="zoom" className="mt-14 overflow-hidden rounded-3xl border border-accent/20 bg-gradient-to-br from-surface via-bg-alt to-bg py-7">
+          <p className="px-6 text-xs font-semibold uppercase tracking-widest text-accent sm:px-8">{t.skills.stack}</p>
+          {/* Cinta infinita de tecnologías (se pausa al pasar el mouse) */}
+          <div className="marquee mt-5 overflow-hidden" aria-label={t.skills.stack}>
+            <ul className="marquee-track gap-3 pr-3">
+              {loop.map((tech, i) => (
+                <li
+                  key={`${tech}-${i}`}
+                  aria-hidden={i >= profile.tech.length}
+                  className="whitespace-nowrap rounded-full border border-accent/25 bg-accent/5 px-4 py-1.5 text-sm font-medium text-fg-soft transition-all hover:-translate-y-0.5 hover:border-accent hover:bg-accent/15 hover:text-accent"
+                >
+                  {tech}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </Reveal>
       </div>
     </section>
   );
