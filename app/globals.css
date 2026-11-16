@@ -1,27 +1,157 @@
 @import "tailwindcss";
 
-/* ───────────── Paleta: Negro (fondo/superficie) + Dorado (acentos) ───────────── */
+/* El modo oscuro se activa con data-theme="dark" en <html> */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+/* ───────────── Tokens de color por tema ───────────── */
+:root,
+:root[data-theme="dark"] {
+  --bg: #09090b;
+  --bg-alt: #0d0d12;
+  --bg-deep: #050507;
+  --surface: #121217;
+  --surface-2: #18181f;
+  --line: #27272f;
+  --fg: #fafafa;
+  --fg-soft: #d4d4d8;
+  --muted: #a1a1aa;
+  --accent: #f5c443; /* texto/iconos dorados */
+  --accent-strong: #d4af37; /* dorado principal */
+  --grad-from: #fde68a;
+  --grad-via: #f5c443;
+  --grad-to: #d4a017;
+  --shadow: rgba(0, 0, 0, 0.7);
+  --glow: rgba(245, 196, 67, 0.35);
+  --edge-glow: #f5c443; /* borde iluminado de las tarjetas */
+  --flashlight: rgba(212, 175, 55, 0.22); /* linterna de las tarjetas: --accent-strong al 22 % */
+  --grid-glow: rgba(212, 175, 55, 0.55); /* rejilla dorada del hero */
+
+  /* Rellenos dorados (botón primario, selector ES/EN, volver arriba) y el texto que va encima */
+  --gold-1: #f5c443;
+  --gold-2: #d4af37;
+  --gold-3: #b8860b;
+  --on-gold: #09090b;
+  /* Degradados de detalle: barra de progreso / subrayado del menú (bar) y líneas de título / línea de tiempo (rule) */
+  --bar-from: oklch(82.8% 0.189 84.429); /* amber-400 */
+  --bar-via: oklch(90.5% 0.182 98.111); /* yellow-300 */
+  --bar-to: oklch(66.6% 0.179 58.318); /* amber-600 */
+  --rule-from: oklch(87.9% 0.169 91.605); /* amber-300 */
+  --rule-to: oklch(66.6% 0.179 58.318); /* amber-600 */
+  /* Manchas de luz (hero y contacto), rejilla y linterna del hero */
+  --blob-1: color-mix(in oklab, oklch(82.8% 0.189 84.429) 20%, transparent); /* amber-400/20 */
+  --blob-2: color-mix(in oklab, oklch(68.1% 0.162 75.834) 15%, transparent); /* yellow-600/15 */
+  --blob-3: color-mix(in oklab, oklch(82.8% 0.189 84.429) 10%, transparent); /* amber-400/10 */
+  --grid-line: var(--line);
+  --hero-light: color-mix(in srgb, var(--accent-strong) 12%, transparent);
+  /* Etiqueta "01 · año" sobre las imágenes de proyectos */
+  --tag-bg: rgb(0 0 0 / 0.55);
+  --tag-border: rgb(255 255 255 / 0.2);
+  --tag-fg: oklch(92.4% 0.12 95.746); /* amber-200 */
+  /* Reflejo .tilt-glare */
+  --glare-soft: rgb(255 255 255 / 0.05);
+  --glare-peak: rgb(255 255 255 / 0.17);
+  /* Sombra de reposo de las tarjetas: en oscuro no hay */
+  --rest-shadow: 0 0 #0000;
+  /* Campos del formulario y pie de página */
+  --field: var(--bg);
+  --footer-bg: var(--bg-deep);
+  /* Logo: insignia obsidiana, sombra/brillo del oro y destello del hover */
+  --logo-bg-1: #18181d;
+  --logo-bg-2: #0d0d11;
+  --logo-bg-3: #050507;
+  --logo-deep: #7a5a0e;
+  --logo-hi: #fff4c8;
+  --logo-shadow: rgba(0, 0, 0, 0.6);
+  --logo-gloss: rgba(255, 255, 255, 0.07);
+  --logo-sheen: rgba(255, 255, 255, 0.5);
+  color-scheme: dark;
+}
+
+/* Claro: marfil cálido, tarjetas blancas con borde dorado suave y sombras cálidas.
+   Texto dorado = bronce (AA ≥ 4.5:1 sobre marfil, crema y blanco);
+   el dorado brillante (--accent-strong, --gold-*) queda para rellenos y detalles. */
+:root[data-theme="light"] {
+  --bg: #fcf9f2; /* marfil */
+  --bg-alt: #f6eedd; /* crema: se distingue de --bg sin verse gris */
+  --bg-deep: #efe3c8;
+  --surface: #ffffff;
+  --surface-2: #fbf6ea;
+  --line: #ead9b4; /* borde dorado suave */
+  --fg: #1c160c;
+  --fg-soft: #3d3428;
+  --muted: #6b604d; /* 5.3:1 sobre crema */
+  --accent: #7d560c; /* bronce: 5.6:1 sobre crema, 6.5:1 sobre blanco */
+  --accent-strong: #d4a72c;
+  --grad-from: #a87a10; /* texto grande: ≥ 3.6:1 en todo el degradado */
+  --grad-via: #8a600e;
+  --grad-to: #6b4508;
+  --shadow: rgba(122, 86, 20, 0.22); /* sombra cálida, no gris */
+  --glow: rgba(212, 167, 44, 0.38);
+  --edge-glow: #a87a10; /* bronce dorado: el dorado claro se perdería sobre blanco */
+  --flashlight: rgba(212, 167, 44, 0.13);
+  --grid-glow: rgba(150, 104, 20, 0.3);
+
+  --gold-1: #f3c95a;
+  --gold-2: #d9ab33;
+  --gold-3: #a97a10;
+  --on-gold: #1a1408;
+  --bar-from: #c99a26;
+  --bar-via: #e9c564;
+  --bar-to: #9a6a0e;
+  --rule-from: #e2b84a;
+  --rule-to: #9a6a0e;
+  --blob-1: rgba(238, 196, 84, 0.24); /* luz dorada */
+  --blob-2: rgba(232, 168, 96, 0.14); /* toque albaricoque, más cálido que amarillo */
+  --blob-3: rgba(238, 196, 84, 0.16);
+  --grid-line: rgba(168, 122, 16, 0.26);
+  --hero-light: rgba(222, 176, 52, 0.16);
+  --tag-bg: rgba(255, 252, 244, 0.86);
+  --tag-border: rgba(201, 158, 40, 0.45);
+  --tag-fg: #6e4b08;
+  --glare-soft: rgba(255, 244, 214, 0.08);
+  --glare-peak: rgba(255, 248, 228, 0.4);
+  --rest-shadow: 0 1px 2px rgba(122, 86, 20, 0.06), 0 14px 32px -20px rgba(122, 86, 20, 0.22);
+  --field: #fffdf8;
+  --footer-bg: radial-gradient(70% 140% at 50% 0%, rgba(222, 176, 52, 0.14), transparent 65%),
+    linear-gradient(180deg, #f5ecd8, #eee1c3);
+  /* Logo: insignia marfil con borde dorado */
+  --logo-bg-1: #fffdf8;
+  --logo-bg-2: #fbf4e4;
+  --logo-bg-3: #f2e5c7;
+  --logo-deep: #6b4508;
+  --logo-hi: #fff8e0;
+  --logo-shadow: rgba(107, 69, 8, 0.28);
+  --logo-gloss: rgba(255, 255, 255, 0.85);
+  --logo-sheen: rgba(255, 255, 255, 0.9);
+  color-scheme: light;
+}
+
 @theme inline {
-  --color-brand-50: #fefce8;
-  --color-brand-100: #fef9c3;
-  --color-brand-200: #fef08a;
-  --color-brand-300: #fde047;
-  --color-brand-400: #facc15;
-  --color-brand-500: #eab308;
-  --color-brand-600: #ca8a04;
-  --color-brand-700: #d4af37; /* Dorado principal */
-  --color-brand-800: #a16207;
-  --color-brand-900: #713f12;
-  --color-brand-950: #422006;
-
-  --color-surface-950: #050507;
-  --color-surface-900: #0a0a0d;
-  --color-surface-850: #121217;
-  --color-surface-800: #18181f;
-  --color-surface-border: #272730;
-
-  --color-ink: #fdfdfd;   /* Texto principal de alto contraste */
-  --color-muted: #a1a1aa; /* Texto secundario legible */
+  --color-bg: var(--bg);
+  --color-bg-alt: var(--bg-alt);
+  --color-bg-deep: var(--bg-deep);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-line: var(--line);
+  --color-fg: var(--fg);
+  --color-fg-soft: var(--fg-soft);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  --color-accent-strong: var(--accent-strong);
+  --color-gold-1: var(--gold-1);
+  --color-gold-3: var(--gold-3);
+  --color-bar-from: var(--bar-from);
+  --color-bar-via: var(--bar-via);
+  --color-bar-to: var(--bar-to);
+  --color-rule-from: var(--rule-from);
+  --color-rule-to: var(--rule-to);
+  --color-blob-1: var(--blob-1);
+  --color-blob-2: var(--blob-2);
+  --color-blob-3: var(--blob-3);
+  --color-tag-bg: var(--tag-bg);
+  --color-tag-border: var(--tag-border);
+  --color-tag-fg: var(--tag-fg);
+  --color-field: var(--field);
 
   --font-sans: var(--font-dm-sans), ui-sans-serif, system-ui, sans-serif;
   --font-display: var(--font-bricolage), ui-sans-serif, system-ui, sans-serif;
@@ -30,24 +160,35 @@
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 5rem;
-  color-scheme: dark;
 }
 
 body {
-  background: #09090b;
-  color: #f4f4f5;
+  background: var(--bg);
+  color: var(--fg);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
+  /* Evita el scroll horizontal en móvil por elementos decorativos */
+  overflow-x: clip;
+  transition: background-color 0.4s ease, color 0.4s ease;
 }
 
 ::selection {
-  background: #d4af37;
-  color: #09090b;
+  background: var(--accent-strong);
+  color: var(--on-gold);
 }
 
 :focus-visible {
-  outline: 2px solid #f5c042;
+  outline: 2px solid var(--accent);
   outline-offset: 3px;
+}
+
+/* Transición suave al cambiar de tema */
+html.theme-transition,
+html.theme-transition *,
+html.theme-transition *::before,
+html.theme-transition *::after {
+  transition: background-color 0.45s ease, border-color 0.45s ease, color 0.45s ease,
+    fill 0.45s ease, box-shadow 0.45s ease !important;
 }
 
 @layer components {
@@ -64,12 +205,53 @@ body {
   }
 
   .section {
-    padding-block: 5rem;
+    padding-block: 4.5rem;
+    /* Recorta lo que entra desde los lados (Reveal "left"/"right" = ±56px).
+       El clip del body no basta: en móvil Chrome ensancha el viewport igual. */
+    overflow-x: clip;
   }
   @media (min-width: 1024px) {
     .section {
       padding-block: 7rem;
     }
+  }
+
+  .text-gradient {
+    background-image: linear-gradient(100deg, var(--grad-from), var(--grad-via), var(--grad-to), var(--grad-via), var(--grad-from));
+    background-size: 220% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: shimmer 7s linear infinite;
+  }
+
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-radius: 9999px;
+    border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
+    background: color-mix(in srgb, var(--accent) 7%, transparent);
+    padding: 0.25rem 0.8rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  .card {
+    border-radius: 1.5rem;
+    border: 1px solid var(--line);
+    background: var(--surface);
+    box-shadow: var(--rest-shadow), 0 20px 50px -25px var(--shadow);
+  }
+  /* Sombra cálida en reposo para tarjetas que no usan .card (en oscuro no pinta nada) */
+  .rest-shadow {
+    box-shadow: var(--rest-shadow);
+  }
+  .footer-bg {
+    background: var(--footer-bg);
   }
 
   .btn {
@@ -81,48 +263,401 @@ body {
     padding: 0.8rem 1.4rem;
     font-weight: 600;
     font-size: 0.95rem;
-    transition: all 0.25s ease;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease,
+      border-color 0.25s ease, color 0.25s ease;
+    position: relative;
+    overflow: hidden;
   }
   .btn-primary {
-    background: linear-gradient(135deg, #f5c443 0%, #d4af37 50%, #b8860b 100%);
-    color: #09090b;
+    background: linear-gradient(135deg, var(--gold-1) 0%, var(--gold-2) 50%, var(--gold-3) 100%);
+    color: var(--on-gold);
     font-weight: 700;
-    box-shadow: 0 4px 20px -2px rgba(212, 175, 55, 0.35);
+    box-shadow: 0 4px 20px -2px var(--glow);
+  }
+  /* Brillo que cruza el botón al pasar el mouse */
+  .btn-primary::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(110deg, transparent 30%, rgba(255, 255, 255, 0.55) 50%, transparent 70%);
+    transform: translateX(-120%);
+    transition: transform 0.7s ease;
+  }
+  .btn-primary:hover::after {
+    transform: translateX(120%);
   }
   .btn-primary:hover {
-    background: linear-gradient(135deg, #fde68a 0%, #f5c443 50%, #d4af37 100%);
-    box-shadow: 0 6px 25px 0px rgba(212, 175, 55, 0.55);
-    transform: translateY(-1px);
+    box-shadow: 0 8px 28px 0 var(--glow);
+    transform: translateY(-2px);
+  }
+  /* Claro: relieve sutil (filo de luz arriba) + sombra cálida en vez del halo difuso */
+  [data-theme="light"] .btn-primary {
+    box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.55), 0 1px 2px rgba(122, 86, 20, 0.2), 0 6px 18px -6px var(--glow);
+  }
+  [data-theme="light"] .btn-primary:hover {
+    box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.55), 0 2px 4px rgba(122, 86, 20, 0.18), 0 12px 28px -8px var(--glow);
   }
   .btn-outline {
-    border: 1.5px solid rgba(212, 175, 55, 0.6);
-    color: #f5c443;
-    background: rgba(212, 175, 55, 0.06);
-    backdrop-blur-sm: 8px;
+    border: 1.5px solid color-mix(in srgb, var(--accent) 60%, transparent);
+    color: var(--accent);
+    background: color-mix(in srgb, var(--accent) 6%, transparent);
   }
   .btn-outline:hover {
-    background: rgba(212, 175, 55, 0.16);
-    border-color: #f5c443;
-    color: #ffffff;
-    transform: translateY(-1px);
+    background: color-mix(in srgb, var(--accent) 16%, transparent);
+    border-color: var(--accent);
+    transform: translateY(-2px);
   }
-  .btn-light {
-    background: #18181f;
-    color: #f4f4f5;
-    border: 1px solid rgba(212, 175, 55, 0.3);
+
+  .icon-btn {
+    display: flex;
+    height: 2.5rem;
+    width: 2.5rem;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.75rem;
+    border: 1px solid color-mix(in srgb, var(--accent) 35%, transparent);
+    background: color-mix(in srgb, var(--accent) 6%, transparent);
+    color: var(--accent);
+    transition: all 0.25s ease;
   }
-  .btn-light:hover {
-    background: #22222b;
-    border-color: #d4af37;
+  .icon-btn:hover {
+    background: var(--accent-strong);
+    border-color: var(--accent-strong);
+    color: var(--on-gold);
+    box-shadow: 0 0 16px var(--glow);
   }
+}
+
+/* ───────────── Animaciones al hacer scroll ───────────── */
+/* Solo se ocultan si hay JS (clase .js en <html>), así nunca queda contenido invisible */
+.js [data-reveal] {
+  opacity: 0;
+  transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), transform 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+    filter 0.9s ease;
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+.js [data-reveal="up"] { transform: translateY(42px); }
+.js [data-reveal="down"] { transform: translateY(-30px); }
+.js [data-reveal="left"] { transform: translateX(-56px); }
+.js [data-reveal="right"] { transform: translateX(56px); }
+.js [data-reveal="zoom"] { transform: scale(0.88); }
+.js [data-reveal="blur"] { filter: blur(12px); transform: translateY(20px); }
+.js [data-reveal="flip"] { transform: perspective(900px) rotateX(18deg) translateY(40px); transform-origin: top; }
+
+.js [data-reveal].is-visible {
+  opacity: 1;
+  transform: none;
+  filter: none;
+}
+
+/* ───────────── Tarjetas con inclinación 3D + foco de luz ─────────────
+   Las variables las anima TiltCard.tsx con un resorte en requestAnimationFrame,
+   por eso aquí no hay transición de transform.
+   --px / --py: mouse normalizado (-1 … 1) · --lift: 0 reposo … 1 elevada */
+.tilt {
+  --rx: 0deg;
+  --ry: 0deg;
+  --mx: 50%;
+  --my: 50%;
+  --px: 0;
+  --py: 0;
+  --lift: 0;
+  transform: perspective(1100px) translateZ(calc(var(--lift) * 10px)) rotateX(var(--rx)) rotateY(var(--ry))
+    scale(calc(1 + var(--lift) * 0.02));
+  transition: box-shadow 0.4s ease, border-color 0.4s ease;
+  position: relative;
+}
+/* Sombra que se desplaza al lado contrario de la inclinación */
+.tilt::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  pointer-events: none;
+  box-shadow: calc(var(--px) * -22px) calc(var(--py) * -22px + 28px) 50px -20px var(--shadow);
+  opacity: clamp(0, var(--lift), 1);
+}
+/* Reflejo de luz: una franja suave que sigue al mouse */
+.tilt-glare {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  border-radius: inherit;
+  pointer-events: none;
+  background: linear-gradient(
+    115deg,
+    transparent 32%,
+    var(--glare-soft) 42%,
+    var(--glare-peak) 50%,
+    var(--glare-soft) 58%,
+    transparent 68%
+  );
+  background-size: 200% 200%;
+  background-position: calc(100% - var(--mx)) calc(100% - var(--my));
+  opacity: clamp(0, var(--lift), 1);
+}
+.tilt.is-hovering [data-depth] {
+  will-change: translate;
+}
+/* Borde que se ilumina cerca del cursor: un degradado radial que cubre la tarjeta
+   recortado con máscara para que solo quede el anillo del padding (1.5px). */
+.tilt::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  padding: 1.5px;
+  border-radius: inherit;
+  pointer-events: none;
+  background: radial-gradient(
+    240px circle at var(--mx) var(--my),
+    var(--edge-glow),
+    color-mix(in srgb, var(--edge-glow) 45%, transparent) 35%,
+    transparent 70%
+  );
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+/* Si la propia tarjeta tiene borde, el anillo se coloca encima de él */
+.tilt.border::before,
+.tilt.card::before {
+  inset: -1px;
+}
+/* Linterna: foco dorado encima del contenido (también sobre fotos y formularios),
+   por debajo del reflejo (z 3) y del borde (z 4) */
+.tilt-light {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  border-radius: inherit;
+  pointer-events: none;
+  background: radial-gradient(420px circle at var(--mx) var(--my), var(--flashlight), transparent 45%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+.tilt.is-hovering::before,
+.tilt.is-hovering .tilt-light {
+  opacity: 1;
+}
+
+/* Hero: Hero.tsx escribe --sx/--sy (posición del cursor) e is-lit en .hero-bg.
+   Linterna: foco dorado suave. Encima, una copia dorada de la rejilla (mismo tamaño
+   y origen, así las líneas coinciden) visible solo en un círculo alrededor del cursor. */
+.hero-bg {
+  --sx: 50%;
+  --sy: 30%;
+}
+.hero-light {
+  background: radial-gradient(500px circle at var(--sx) var(--sy), var(--hero-light), transparent 60%);
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+.hero-grid-glow {
+  background-image: linear-gradient(var(--grid-glow) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-glow) 1px, transparent 1px);
+  background-size: 56px 56px;
+  -webkit-mask-image: radial-gradient(220px circle at var(--sx) var(--sy), #000, rgb(0 0 0 / 0.4) 45%, transparent 100%);
+  mask-image: radial-gradient(220px circle at var(--sx) var(--sy), #000, rgb(0 0 0 / 0.4) 45%, transparent 100%);
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+.hero-bg.is-lit .hero-light,
+.hero-bg.is-lit .hero-grid-glow {
+  opacity: 1;
+}
+/* Sin efectos de cursor en pantallas táctiles */
+@media (hover: none), (pointer: coarse) {
+  .tilt::before,
+  .tilt-light,
+  .hero-light,
+  .hero-grid-glow {
+    display: none;
+  }
+}
+
+/* Imagen de proyecto: zoom + brillo diagonal */
+.project-media img {
+  transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1), filter 0.6s ease;
+}
+.group:hover .project-media img {
+  transform: scale(1.07);
+}
+.project-media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(115deg, transparent 35%, rgba(255, 255, 255, 0.28) 50%, transparent 65%);
+  transform: translateX(-130%);
+  transition: transform 1s ease;
+  pointer-events: none;
+}
+.group:hover .project-media::after {
+  transform: translateX(130%);
+}
+
+/* ───────────── Logo (Logo.tsx) ─────────────
+   Carga: se dibuja el contorno de cada forma y luego entra el relleno, una sola vez
+   (pathLength=1 → dasharray 1). El estado final es el estilo base, así que si la
+   animación se desactiva (reducir movimiento) el logo se ve completo.
+   Hover: giro 3D leve + destello que cruza la insignia (solo de ida; al salir vuelve sin transición). */
+.logo {
+  overflow: visible;
+  transform: perspective(260px) rotateX(0deg) rotateY(0deg);
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1), filter 0.6s ease;
+}
+.logo:hover,
+:is(a, button):hover > .logo,
+:is(a, button):focus-visible > .logo {
+  transform: perspective(260px) rotateX(8deg) rotateY(-16deg) scale(1.05);
+  filter: drop-shadow(0 6px 10px var(--glow));
+}
+.logo-sheen {
+  transform: translateX(-70px);
+}
+.logo:hover .logo-sheen,
+:is(a, button):hover > .logo .logo-sheen,
+:is(a, button):focus-visible > .logo .logo-sheen {
+  transform: translateX(160px);
+  transition: transform 0.9s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.logo-draw-fill {
+  stroke-dasharray: 1;
+  animation: logo-draw 1.3s cubic-bezier(0.65, 0, 0.35, 1) var(--ld, 0s) both,
+    logo-fill 0.7s ease calc(var(--ld, 0s) + 0.9s) both;
+}
+.logo-fade {
+  animation: logo-fade 0.7s ease var(--lf, 1s) both;
+}
+@keyframes logo-draw {
+  from { stroke-dashoffset: 1; }
+  to { stroke-dashoffset: 0; }
+}
+@keyframes logo-fill {
+  from { fill-opacity: 0; }
+}
+@keyframes logo-fade {
+  from { opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .logo {
+    transform: none !important;
+    filter: none !important;
+  }
+  .logo-sheen {
+    display: none;
+  }
+}
+
+/* ───────────── Keyframes ───────────── */
+@keyframes shimmer {
+  to { background-position: 220% center; }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-14px); }
+}
+@keyframes blob {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(40px, -30px) scale(1.1); }
+  66% { transform: translate(-30px, 25px) scale(0.95); }
+}
+@keyframes marquee {
+  to { transform: translateX(-50%); }
+}
+@keyframes enter-up {
+  from { opacity: 0; transform: translateY(28px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes pulse-ring {
+  0% { box-shadow: 0 0 0 0 var(--glow); }
+  70% { box-shadow: 0 0 0 10px transparent; }
+  100% { box-shadow: 0 0 0 0 transparent; }
+}
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+.animate-float { animation: float 6s ease-in-out infinite; }
+.animate-blob { animation: blob 14s ease-in-out infinite; }
+.animate-pulse-ring { animation: pulse-ring 2.2s ease-out infinite; }
+.animate-blink { animation: blink 1s step-end infinite; }
+
+/* Entrada escalonada del hero al cargar */
+.enter {
+  opacity: 0;
+  animation: enter-up 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation-delay: var(--d, 0ms);
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 32s linear infinite;
+}
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+.marquee {
+  mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
 }
 
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
   }
-  * {
+  *,
+  *::before,
+  *::after {
     animation: none !important;
     transition: none !important;
   }
+  .enter,
+  .js [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+  }
+  .tilt {
+    transform: none !important;
+  }
+  .tilt::after,
+  .tilt::before,
+  .tilt-glare,
+  .tilt-light,
+  .hero-light,
+  .hero-grid-glow {
+    display: none;
+  }
+  .tilt [data-depth] {
+    translate: none !important;
+  }
+}
+
+/* Anillo dorado giratorio alrededor de la foto */
+@property --angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+@keyframes ring-rotate {
+  to { --angle: 360deg; }
+}
+.gold-ring {
+  padding: 2px;
+  background: conic-gradient(from var(--angle), transparent 0deg, var(--accent-strong) 70deg, transparent 140deg, transparent 200deg, var(--accent) 270deg, transparent 340deg);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+  animation: ring-rotate 6s linear infinite;
+  opacity: 0.9;
+}
+/* Claro: arco brillante en dorado de relleno y arco opuesto en bronce, a opacidad plena */
+[data-theme="light"] .gold-ring {
+  background: conic-gradient(from var(--angle), transparent 0deg, var(--gold-2) 70deg, transparent 140deg, transparent 200deg, var(--accent) 270deg, transparent 340deg);
+  opacity: 1;
 }
