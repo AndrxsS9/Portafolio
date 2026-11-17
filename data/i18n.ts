@@ -10,6 +10,7 @@ export const ui = {
       skills: "Habilidades",
       projects: "Proyectos",
       experience: "Trayectoria",
+      references: "Referencias",
       contact: "Contacto",
       cta: "Contactar",
       openMenu: "Abrir menú",
@@ -38,6 +39,8 @@ export const ui = {
       download: "Descargar hoja de vida",
       seeProjects: "Ver proyectos",
       photoAlt: "Foto de",
+      offClock: "Fuera del código",
+      languages: "Idiomas",
     },
     skills: {
       eyebrow: "Habilidades y servicios",
@@ -51,7 +54,6 @@ export const ui = {
       title: "Proyectos",
       titleAccent: "destacados",
       intro: "Apps móviles, de escritorio, para smartwatch y un videojuego. Cada uno resolvió un problema distinto.",
-      role: "Mi rol",
       imageAlt: "Captura del proyecto",
     },
     experience: {
@@ -61,9 +63,14 @@ export const ui = {
       intro: "Formación académica y proyectos prácticos centrados en calidad y en resolver problemas reales.",
       education: "Formación académica",
       degree: "Ingeniería de Software",
-      period: "2024 – En curso",
+      period: "Pregrado · Actualidad",
       educationText:
         "Formación en metodologías ágiles, análisis de requerimientos, patrones de diseño y arquitectura de software.",
+      seminars: "Seminarios y conferencias",
+    },
+    references: {
+      eyebrow: "Lo que dicen de mí",
+      title: "Referencias",
     },
     contact: {
       eyebrow: "Hablemos",
@@ -103,6 +110,7 @@ export const ui = {
       skills: "Skills",
       projects: "Projects",
       experience: "Journey",
+      references: "References",
       contact: "Contact",
       cta: "Contact me",
       openMenu: "Open menu",
@@ -131,6 +139,8 @@ export const ui = {
       download: "Download résumé",
       seeProjects: "See projects",
       photoAlt: "Photo of",
+      offClock: "Off the clock",
+      languages: "Languages",
     },
     skills: {
       eyebrow: "Skills & services",
@@ -144,7 +154,6 @@ export const ui = {
       title: "Featured",
       titleAccent: "projects",
       intro: "Mobile, desktop and smartwatch apps, plus a video game. Each one solved a different problem.",
-      role: "My role",
       imageAlt: "Screenshot of",
     },
     experience: {
@@ -154,9 +163,14 @@ export const ui = {
       intro: "Academic training and hands-on projects focused on quality and solving real problems.",
       education: "Education",
       degree: "Software Engineering",
-      period: "2024 – Present",
+      period: "Undergraduate · Present",
       educationText:
         "Training in agile methodologies, requirements analysis, design patterns and software architecture.",
+      seminars: "Seminars & conferences",
+    },
+    references: {
+      eyebrow: "What people say",
+      title: "References",
     },
     contact: {
       eyebrow: "Let's talk",
