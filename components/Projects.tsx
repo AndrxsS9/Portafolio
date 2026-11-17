@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowUpRight, Check, Download, ExternalLink, Github, UserRound } from "lucide-react";
+import { ArrowUpRight, Check, Download, ExternalLink, Github } from "lucide-react";
 import { projects, type ProjectLink } from "@/data/projects";
 import { usePrefs } from "@/components/Preferences";
 import Reveal from "@/components/Reveal";
@@ -17,7 +17,7 @@ export default function Projects() {
   const { lang, t } = usePrefs();
 
   return (
-    <section id="projects" className="section border-t border-line bg-bg-alt">
+    <section id="projects" className="section border-t border-line veil-alt">
       <div className="wrap">
         <SectionHeading eyebrow={t.projects.eyebrow} title={t.projects.title} accent={t.projects.titleAccent} intro={t.projects.intro} />
 
@@ -75,13 +75,6 @@ export default function Projects() {
                       </Reveal>
                     ))}
                   </ul>
-
-                  <Reveal delay={300} className="mt-4 flex items-start gap-2 rounded-xl border-l-2 border-accent bg-accent/5 px-3 py-2 text-sm text-fg-soft">
-                    <UserRound size={16} className="mt-0.5 shrink-0 text-accent" />
-                    <span>
-                      <strong className="text-fg">{t.projects.role}:</strong> {p.role}
-                    </span>
-                  </Reveal>
 
                   <Reveal as="ul" delay={360} className="mt-5 flex flex-wrap gap-2">
                     {project.tags.map((tag) => {
