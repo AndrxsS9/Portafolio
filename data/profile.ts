@@ -6,15 +6,17 @@ export const profile = {
   lastName: "Yela Parra",
   fullName: "Cristian Andrés Yela Parra",
   shortName: { first: "Andrés", last: "Yela" },
-  email: "cristian.yela@campusucc.edu.co",
+  email: "cristianyela.57@gmail.com",
   /** Déjalo vacío ("") si no quieres mostrar teléfono */
   phone: "",
   github: "https://github.com/AndrxsS9",
   githubUser: "@AndrxsS9",
-  /** Pon aquí la URL de tu LinkedIn; vacío = no se muestra */
-  linkedin: "",
+  /** URL de LinkedIn; vacío = no se muestra */
+  linkedin: "https://www.linkedin.com/in/cristian-yela-341835339",
   /** Tu foto: guarda una foto real en public/images/ (ej. foto.jpg) y cambia esta ruta */
   photo: "/images/avatar.svg",
+  /** Foto de la sección "Sobre mí" */
+  aboutPhoto: "/images/foto-perfil.webp",
   /** Hojas de vida en /public */
   cv: { es: "/cv.pdf", en: "/cv-en.pdf" } satisfies Record<Lang, string>,
   tech: [
@@ -34,7 +36,6 @@ export const profile = {
     "Google Gemini API",
     "PostgreSQL",
     "Supabase",
-    "Zod",
     "Vitest",
     "Git & GitHub",
   ],
@@ -52,11 +53,18 @@ type LocalizedProfile = {
     p1: string;
     p2: string;
     highlights: { title: string; text: string }[];
+    /** Bloque "Fuera del código" */
+    offClock: string;
+    /** Bloque "Idiomas" */
+    languages: { name: string; level: string; note?: string }[];
   };
   services: { title: string; text: string }[];
   specialties: string[];
-  timeline: { period: string; title: string; place: string; text: string }[];
+  /** label: etiqueta corta en lugar de fechas */
+  timeline: { label: string; title: string; place: string; text: string }[];
   achievements: string[];
+  seminars: string;
+  references: { name: string; role: string; quote: string }[];
 };
 
 export const profileText: Record<Lang, LocalizedProfile> = {
@@ -74,12 +82,18 @@ export const profileText: Record<Lang, LocalizedProfile> = {
     ],
     about: {
       semester: "5.º semestre",
-      p1: "Soy estudiante de Ingeniería de Software en la Universidad Cooperativa de Colombia (Campus Pasto) y llevo 2 años construyendo proyectos reales: me gusta resolver problemas concretos y ver el producto funcionando en manos de alguien.",
-      p2: "He trabajado en apps móviles con React Native y Expo, APIs con Node.js y Express, una app de escritorio con Tauri y Rust, un videojuego en Unity y prototipos para smartwatch. En casi todos integro IA (Google Gemini) para que la app haga algo útil por el usuario.",
+      p1: "Tengo 18 años y estudio Ingeniería de Software en la Universidad Cooperativa de Colombia, en Pasto. Desde niño me llamó la atención la tecnología: quería entender cómo se hacían los videojuegos que jugaba y cómo funcionaban por dentro las páginas web y las apps que usamos todos los días.",
+      p2: "Hoy eso es justo lo que hago. He trabajado en apps móviles con React Native y Expo, APIs con Node.js y Express, una app de escritorio con Tauri y Rust, un videojuego en Unity y prototipos para smartwatch. En casi todos integro IA (Google Gemini) para que la app le resuelva algo real a quien la usa.",
       highlights: [
         { title: "Full-Stack", text: "React, Next.js, TypeScript, Node.js y Express" },
         { title: "Móvil y escritorio", text: "React Native, Expo, Tauri y Rust" },
         { title: "Inteligencia Artificial", text: "Google Gemini, análisis de imágenes y lenguaje natural" },
+      ],
+      offClock:
+        "Lo que más practico es el microfútbol y el fútbol. También me gustan los videojuegos. Soy hincha del Barcelona, mis jugadores favoritos son Messi y Neymar, y no me pierdo los partidos de la Selección Colombia ni del Barça.",
+      languages: [
+        { name: "Español", level: "Nativo" },
+        { name: "Inglés", level: "Básico", note: "Lo entiendo y lo leo, pero todavía no lo hablo con fluidez." },
       ],
     },
     services: [
@@ -97,7 +111,7 @@ export const profileText: Record<Lang, LocalizedProfile> = {
       },
       {
         title: "APIs y Backend",
-        text: "Servicios REST tipados y seguros con Node.js, Express, Zod y Helmet, y bases de datos relacionales.",
+        text: "Servicios REST tipados y seguros con Node.js, Express y Helmet, y bases de datos relacionales.",
       },
       {
         title: "Escritorio y Videojuegos",
@@ -116,29 +130,56 @@ export const profileText: Record<Lang, LocalizedProfile> = {
     ],
     timeline: [
       {
-        period: "2024 – Presente",
+        label: "Pregrado · Actualidad",
+        title: "Ingeniería de Software",
+        place: "Universidad Cooperativa de Colombia, Campus Pasto",
+        text: "Arquitectura de software, microservicios, diseño de interfaces, APIs REST y desarrollo móvil.",
+      },
+      {
+        label: "Experiencia",
+        title: "Página web para un negocio de spa",
+        place: "Proyecto para cliente",
+        text: "Sitio web para un spa con agendamiento de citas por WhatsApp.",
+      },
+      {
+        label: "Proyectos",
         title: "Proyectos de software web, móvil, escritorio y juegos",
         place: "Proyectos académicos y personales",
         text: "Diseño y desarrollo de FoodAI, CommandDeck, FocusPulse y Plomo y Paja, integrando servicios de Inteligencia Artificial y trabajando en equipo con Git.",
       },
       {
-        period: "2025 – 2026",
-        title: "Ingeniería de Software — 5.º semestre",
-        place: "Universidad Cooperativa de Colombia",
-        text: "Arquitectura de software, microservicios, diseño de interfaces, APIs REST y desarrollo móvil.",
-      },
-      {
-        period: "2024",
-        title: "Fundamentos de programación",
-        place: "Universidad Cooperativa de Colombia",
-        text: "Estructuras de datos, algoritmos, programación orientada a objetos, bases de datos relacionales y Scrum.",
+        label: "Bachiller",
+        title: "Bachiller académico",
+        place: "Institución Educativa Municipal Heraldo Romero Sánchez, Pasto",
+        text: "Formación secundaria académica.",
       },
     ],
     achievements: [
       "FoodAI: app móvil (Expo) + backend en Express 5 con análisis de alimentos usando Gemini.",
       "CommandDeck: app de escritorio con Tauri y Rust que convierte lenguaje natural en comandos.",
       "Plomo y Paja: videojuego FPS en Unity desarrollado en equipo de tres personas.",
-      "Buenas prácticas: TypeScript estricto, validación con Zod, pruebas con Vitest y Git Flow.",
+      "Buenas prácticas: TypeScript estricto, pruebas con Vitest y Git Flow.",
+    ],
+    seminars: "Asistí a 4 seminarios y conferencias de tecnología e ingeniería de software durante la carrera.",
+    references: [
+      {
+        name: "Antony Rodríguez",
+        role: "Estudiante de Ingeniería de Sistemas, Universidad de Nariño",
+        quote:
+          "Trabaja bien y, ante todo, busca dar lo mejor para sus clientes. Usa buenas prácticas en lo que desarrolla y siempre está intentando mejorar.",
+      },
+      {
+        name: "Jesús Narváez",
+        role: "Diseñador gráfico y de contenido digital",
+        quote:
+          "Es responsable con lo que se compromete. Explica lo que hace, pregunta cuando algo no está claro y no lo deja hasta que funciona bien.",
+      },
+      {
+        name: "Johan Amaya",
+        role: "Técnico en soporte informático",
+        quote:
+          "Lo que más destaco es lo rápido que aprende. Si no conoce una herramienta, la estudia y al poco tiempo ya la está usando. Es organizado y es fácil trabajar con él.",
+      },
     ],
   },
   en: {
@@ -155,12 +196,18 @@ export const profileText: Record<Lang, LocalizedProfile> = {
     ],
     about: {
       semester: "5th semester",
-      p1: "I'm a Software Engineering student at Universidad Cooperativa de Colombia (Pasto Campus) and I've spent the last 2 years building real projects: I enjoy solving concrete problems and seeing the product working in someone's hands.",
-      p2: "I've worked on mobile apps with React Native and Expo, APIs with Node.js and Express, a desktop app with Tauri and Rust, a Unity video game and smartwatch prototypes. In most of them I integrate AI (Google Gemini) so the app does something genuinely useful for the user.",
+      p1: "I'm 18 and I study Software Engineering at Universidad Cooperativa de Colombia, in Pasto. Technology caught my attention ever since I was a kid: I wanted to understand how the video games I played were made and how the websites and apps we use every day work on the inside.",
+      p2: "Today that's exactly what I do. I've worked on mobile apps with React Native and Expo, APIs with Node.js and Express, a desktop app with Tauri and Rust, a Unity video game and smartwatch prototypes. In almost all of them I integrate AI (Google Gemini) so the app solves something real for whoever uses it.",
       highlights: [
         { title: "Full-Stack", text: "React, Next.js, TypeScript, Node.js and Express" },
         { title: "Mobile & desktop", text: "React Native, Expo, Tauri and Rust" },
         { title: "Artificial Intelligence", text: "Google Gemini, image analysis and natural language" },
+      ],
+      offClock:
+        "What I play the most is futsal and football. I also enjoy video games. I'm a Barcelona fan, my favorite players are Messi and Neymar, and I never miss a Colombia national team or Barça match.",
+      languages: [
+        { name: "Spanish", level: "Native" },
+        { name: "English", level: "Basic", note: "I can read and understand it, but I'm not fluent speaking it yet." },
       ],
     },
     services: [
@@ -178,7 +225,7 @@ export const profileText: Record<Lang, LocalizedProfile> = {
       },
       {
         title: "APIs & Backend",
-        text: "Typed, secure REST services with Node.js, Express, Zod and Helmet, plus relational databases.",
+        text: "Typed, secure REST services with Node.js, Express and Helmet, plus relational databases.",
       },
       {
         title: "Desktop & Games",
@@ -197,29 +244,56 @@ export const profileText: Record<Lang, LocalizedProfile> = {
     ],
     timeline: [
       {
-        period: "2024 – Present",
+        label: "Undergraduate · Present",
+        title: "Software Engineering",
+        place: "Universidad Cooperativa de Colombia, Pasto Campus",
+        text: "Software architecture, microservices, interface design, REST APIs and mobile development.",
+      },
+      {
+        label: "Experience",
+        title: "Website for a spa business",
+        place: "Client project",
+        text: "Website for a spa with appointment booking through WhatsApp.",
+      },
+      {
+        label: "Projects",
         title: "Web, mobile, desktop and game software projects",
         place: "Academic and personal projects",
         text: "Designed and built FoodAI, CommandDeck, FocusPulse and Plomo y Paja, integrating AI services and working in teams with Git.",
       },
       {
-        period: "2025 – 2026",
-        title: "Software Engineering — 5th semester",
-        place: "Universidad Cooperativa de Colombia",
-        text: "Software architecture, microservices, interface design, REST APIs and mobile development.",
-      },
-      {
-        period: "2024",
-        title: "Programming fundamentals",
-        place: "Universidad Cooperativa de Colombia",
-        text: "Data structures, algorithms, object-oriented programming, relational databases and Scrum.",
+        label: "High school",
+        title: "Academic high school diploma",
+        place: "Institución Educativa Municipal Heraldo Romero Sánchez, Pasto",
+        text: "Academic secondary education.",
       },
     ],
     achievements: [
       "FoodAI: mobile app (Expo) + Express 5 backend that analyzes food with Gemini.",
       "CommandDeck: Tauri + Rust desktop app that turns natural language into terminal commands.",
       "Plomo y Paja: Unity FPS video game built by a team of three.",
-      "Good practices: strict TypeScript, Zod validation, Vitest testing and Git Flow.",
+      "Good practices: strict TypeScript, Vitest testing and Git Flow.",
+    ],
+    seminars: "I attended 4 technology and software engineering seminars and conferences during my degree.",
+    references: [
+      {
+        name: "Antoby Rodríguez",
+        role: "Systems Engineering student, Universidad de Nariño",
+        quote:
+          "He works well and, above all, strives to give his clients his best. He uses good practices in what he builds and is always trying to improve.",
+      },
+      {
+        name: "Jesús Narváez",
+        role: "Graphic and digital content designer",
+        quote:
+          "He's responsible with what he commits to. He explains what he's doing, asks when something isn't clear and doesn't let it go until it works properly.",
+      },
+      {
+        name: "Johan Amaya",
+        role: "IT support technician",
+        quote:
+          "What I value most is how quickly he learns. If he doesn't know a tool, he studies it and before long he's already using it. He's organized and easy to work with.",
+      },
     ],
   },
 };
