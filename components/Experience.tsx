@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { GraduationCap } from "lucide-react";
+import { GraduationCap, Mic } from "lucide-react";
 import { profileText } from "@/data/profile";
 import { usePrefs } from "@/components/Preferences";
 import Reveal from "@/components/Reveal";
@@ -34,7 +34,7 @@ export default function Experience() {
   }, []);
 
   return (
-    <section id="experience" className="section border-t border-line bg-bg">
+    <section id="experience" className="section border-t border-line veil">
       <div className="wrap grid gap-14 lg:grid-cols-[1.3fr_1fr] lg:gap-20">
         <div className="min-w-0">
           <SectionHeading eyebrow={t.experience.eyebrow} title={t.experience.title} accent={t.experience.titleAccent} intro={t.experience.intro} />
@@ -56,7 +56,7 @@ export default function Experience() {
                       reached ? "scale-110 bg-accent-strong shadow-[0_0_12px_var(--glow)]" : "bg-line"
                     }`}
                   />
-                  <p className="text-sm font-semibold text-accent">{item.period}</p>
+                  <p className="text-sm font-semibold text-accent">{item.label}</p>
                   <h3 className="mt-1 font-display text-lg font-bold text-fg sm:text-xl">{item.title}</h3>
                   <p className="text-sm font-medium text-muted">{item.place}</p>
                   <p className="mt-2 leading-relaxed text-fg-soft">{item.text}</p>
@@ -85,6 +85,14 @@ export default function Experience() {
                 </Reveal>
               ))}
             </ul>
+
+            <Reveal variant="left" delay={250 + p.achievements.length * 90} className="mt-6 border-t border-line pt-6">
+              <h4 className="flex items-center gap-2 font-semibold text-fg">
+                <Mic size={18} className="shrink-0 text-accent" />
+                {t.experience.seminars}
+              </h4>
+              <p className="mt-2 text-sm leading-relaxed text-fg-soft">{p.seminars}</p>
+            </Reveal>
           </TiltCard>
         </Reveal>
       </div>
