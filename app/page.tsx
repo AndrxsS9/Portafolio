@@ -4,13 +4,16 @@ import About from "@/components/About";
 import Skills from "@/components/Skills";
 import Projects from "@/components/Projects";
 import Experience from "@/components/Experience";
+import References from "@/components/References";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import BackToTop from "@/components/BackToTop";
+import SceneBackground from "@/components/background/SceneBackground";
 
 export default function Page() {
   return (
     <>
+      <SceneBackground />
       <Navbar />
       <main>
         <Hero />
@@ -18,6 +21,7 @@ export default function Page() {
         <Skills />
         <Projects />
         <Experience />
+        <References />
         <Contact />
       </main>
       <Footer />
