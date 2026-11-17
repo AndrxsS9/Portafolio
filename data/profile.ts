@@ -93,7 +93,7 @@ export const profileText: Record<Lang, LocalizedProfile> = {
         "Lo que más practico es el microfútbol y el fútbol. También me gustan los videojuegos. Soy hincha del Barcelona, mis jugadores favoritos son Messi y Neymar, y no me pierdo los partidos de la Selección Colombia ni del Barça.",
       languages: [
         { name: "Español", level: "Nativo" },
-        { name: "Inglés", level: "Básico", note: "Lo entiendo y lo leo, pero todavía no lo hablo con fluidez." },
+        { name: "Inglés", level: "B1", note: "Lo entiendo y lo leo bien, y sigo mejorando al hablarlo." },
       ],
     },
     services: [
@@ -207,7 +207,7 @@ export const profileText: Record<Lang, LocalizedProfile> = {
         "What I play the most is futsal and football. I also enjoy video games. I'm a Barcelona fan, my favorite players are Messi and Neymar, and I never miss a Colombia national team or Barça match.",
       languages: [
         { name: "Spanish", level: "Native" },
-        { name: "English", level: "Basic", note: "I can read and understand it, but I'm not fluent speaking it yet." },
+        { name: "English", level: "B1", note: "I read and understand it well, and I'm still improving my speaking." },
       ],
     },
     services: [
