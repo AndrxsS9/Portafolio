@@ -31,7 +31,7 @@ export default function Contact() {
   ];
 
   return (
-    <section id="contact" className="section relative overflow-hidden border-t border-line bg-bg-alt">
+    <section id="contact" className="section relative overflow-hidden border-t border-line veil-alt">
       <div aria-hidden className="animate-blob pointer-events-none absolute -right-24 top-10 h-72 w-72 rounded-full bg-blob-3 blur-3xl" />
       <div className="wrap relative grid gap-12 lg:grid-cols-2 lg:gap-20">
         <div className="min-w-0">

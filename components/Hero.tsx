@@ -80,7 +80,7 @@ export default function Hero() {
       ref={sectionRef}
       onPointerMove={onGlowMove}
       onPointerLeave={onGlowLeave}
-      className="relative overflow-hidden bg-bg pb-16 pt-28 lg:pb-24 lg:pt-40"
+      className="relative overflow-hidden veil-hero pb-16 pt-28 lg:pb-24 lg:pt-40"
     >
       {/* Fondo animado: manchas doradas + rejilla + linterna y rejilla dorada que siguen al cursor */}
       <div ref={bgRef} aria-hidden className="hero-bg pointer-events-none absolute inset-0">

@@ -16,7 +16,7 @@ export default function Skills() {
   const loop = [...profile.tech, ...profile.tech];
 
   return (
-    <section id="skills" className="section bg-bg">
+    <section id="skills" className="section veil">
       <div className="wrap">
         <SectionHeading eyebrow={t.skills.eyebrow} title={t.skills.title} accent={t.skills.titleAccent} intro={t.skills.intro} />
 
