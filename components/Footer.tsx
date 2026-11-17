@@ -6,7 +6,7 @@ import Reveal from "@/components/Reveal";
 import { profile, profileText } from "@/data/profile";
 import { usePrefs } from "@/components/Preferences";
 
-const ids = ["home", "about", "skills", "projects", "experience", "contact"] as const;
+const ids = ["home", "about", "skills", "projects", "experience", "references", "contact"] as const;
 
 export default function Footer() {
   const { lang, t } = usePrefs();

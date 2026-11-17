@@ -7,7 +7,7 @@ import { LangToggle, ThemeToggle } from "@/components/Toggles";
 import { profile } from "@/data/profile";
 import { usePrefs } from "@/components/Preferences";
 
-const ids = ["home", "about", "skills", "projects", "experience", "contact"] as const;
+const ids = ["home", "about", "skills", "projects", "experience", "references", "contact"] as const;
 
 export default function Navbar() {
   const { t } = usePrefs();
@@ -84,13 +84,13 @@ export default function Navbar() {
           </span>
         </a>
 
-        <ul className="hidden items-center gap-7 lg:flex">
+        <ul className="hidden items-center gap-4 lg:flex xl:gap-7">
           {ids.map((id) => (
             <li key={id}>
               <a
                 href={`#${id}`}
                 aria-current={active === id ? "true" : undefined}
-                className={`relative py-1 text-sm font-medium transition-colors hover:text-accent ${
+                className={`relative whitespace-nowrap py-1 text-sm font-medium transition-colors hover:text-accent ${
                   active === id ? "text-accent" : "text-fg-soft"
                 }`}
               >
