@@ -33,6 +33,11 @@ export const projects: Project[] = [
     tags: ["React Native", "Expo Router", "TypeScript", "Express 5", "Google Gemini API"],
     links: [
       {
+        kind: "download",
+        href: "https://github.com/AndrxsS9/FoodAI-FrontEnd/releases/latest",
+        label: { es: "Descargar app", en: "Download app" },
+      },
+      {
         kind: "github",
         href: "https://github.com/AndrxsS9/FoodAI-FrontEnd",
         label: { es: "Repo Frontend", en: "Frontend repo" },
@@ -66,6 +71,11 @@ export const projects: Project[] = [
     image: "/images/commanddeck.webp",
     tags: ["Tauri 2", "Rust", "React 19", "TypeScript", "Vite", "Gemini API", "Vitest"],
     links: [
+      {
+        kind: "download",
+        href: "https://github.com/AndrxsS9/CommandDeck/releases/latest",
+        label: { es: "Descargar app", en: "Download app" },
+      },
       {
         kind: "github",
         href: "https://github.com/AndrxsS9/CommandDeck",
@@ -102,6 +112,11 @@ export const projects: Project[] = [
     ],
     links: [
       {
+        kind: "download",
+        href: "https://apps-developer.garmin.com/es-ES/apps/2edf0565-a2aa-42dd-aa83-587414a25ad6",
+        label: { es: "Descargar en Garmin", en: "Get it on Garmin" },
+      },
+      {
         kind: "github",
         href: "https://github.com/AndrxsS9/FocusPulse",
         label: { es: "Repositorio", en: "Repository" },
@@ -131,14 +146,14 @@ export const projects: Project[] = [
     tags: ["Unity 2022 LTS", "C#", "URP", "NavMesh", { es: "Diseño de niveles", en: "Level design" }, "Audio"],
     links: [
       {
-        kind: "github",
-        href: "https://github.com/EdedArt/Plomo_Y_Paja",
-        label: { es: "Repositorio", en: "Repository" },
-      },
-      {
         kind: "download",
         href: "https://github.com/EdedArt/Plomo_Y_Paja/releases/latest",
         label: { es: "Descargar juego", en: "Download game" },
+      },
+      {
+        kind: "github",
+        href: "https://github.com/EdedArt/Plomo_Y_Paja",
+        label: { es: "Repositorio", en: "Repository" },
       },
     ],
     text: {
