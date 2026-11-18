@@ -72,11 +72,11 @@ export const profileText: Record<Lang, LocalizedProfile> = {
     role: "Desarrollador de Software",
     badge: "Disponible para proyectos · UCC Pasto",
     tagline:
-      "Desarrollador de software con 2 años de experiencia creando aplicaciones web, móviles, de escritorio y videojuegos, con integración de Inteligencia Artificial.",
+      "Estudiante de Ingeniería de Software que lleva 2 años creando aplicaciones web, móviles, de escritorio y videojuegos, con integración de Inteligencia Artificial.",
     location: "Pasto, Nariño, Colombia",
     university: "Universidad Cooperativa de Colombia, Campus Pasto",
     stats: [
-      { value: 2, label: "Años de experiencia" },
+      { value: 2, label: "Años programando" },
       { value: 8, suffix: "+", label: "Proyectos creados" },
       { value: 15, suffix: "+", label: "Tecnologías" },
     ],
@@ -186,11 +186,11 @@ export const profileText: Record<Lang, LocalizedProfile> = {
     role: "Software Developer",
     badge: "Open to projects · UCC Pasto",
     tagline:
-      "Software developer with 2 years of experience building web, mobile and desktop apps and video games, with Artificial Intelligence integrations.",
+      "Software Engineering student who has spent 2 years building web, mobile and desktop apps and video games, with Artificial Intelligence integrations.",
     location: "Pasto, Nariño, Colombia",
     university: "Universidad Cooperativa de Colombia, Pasto Campus",
     stats: [
-      { value: 2, label: "Years of experience" },
+      { value: 2, label: "Years coding" },
       { value: 8, suffix: "+", label: "Projects built" },
       { value: 15, suffix: "+", label: "Technologies" },
     ],
