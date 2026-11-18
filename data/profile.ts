@@ -14,9 +14,9 @@ export const profile = {
   /** URL de LinkedIn; vacío = no se muestra */
   linkedin: "https://www.linkedin.com/in/cristian-yela-341835339",
   /** Tu foto: guarda una foto real en public/images/ (ej. foto.jpg) y cambia esta ruta */
-  photo: "/images/avatar.svg",
+  photo: "/images/foto-hero.webp",
   /** Foto de la sección "Sobre mí" */
-  aboutPhoto: "/images/foto-perfil.webp",
+  aboutPhoto: "/images/foto-sobre-mi.webp",
   /** Hojas de vida en /public */
   cv: { es: "/cv.pdf", en: "/cv-en.pdf" } satisfies Record<Lang, string>,
   tech: [
